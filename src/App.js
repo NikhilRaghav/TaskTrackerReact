@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
@@ -13,26 +13,26 @@ function App() {
 	// state is immutable ,, so we have to re-create using the setTasks.
   // if we want to update the tasks , using setTasks , then , if we need to add new tasks , then ,,
   // setTasks( [ ...tasks, {id:'11',text:'test',day:'hello',reminder:false} ] )
-	const [tasks, setTasks] = useState([
-    {
-      id:1,
-      text: 'College Event',
-      day: 'Feb 3th at 6:30pm',
-      reminder: true 
-    },
-    {
-      id:2,
-      text: 'Meeting at School',
-      day: 'Feb 6th at 1:30pm',
-      reminder: true 
-    },
-    {
-      id:3,
-      text: 'Food Shopping',
-      day: 'Feb 5th at 4:30pm',
-      reminder: false 
-    },
-    ])
+	const [tasks, setTasks] = useState([])
+
+  useEffect(() => {
+    const getTasks = async () => {
+      const tasksFromServer = await fetchTasks()
+      setTasks(tasksFromServer)
+    }
+    getTasks()
+  }, [])
+
+  // fetch Data from json-server task. make sure to run the servers in same browser.
+  // since we want this fetch to be a global function , we have it here separately , we can also have it inside the 
+  // useEffect()
+  const fetchTasks = async() => {
+    const response = await fetch('http://localhost:5000/tasks')
+    const data = await response.json()
+
+    console.log(data)
+    return data
+  }
   
   // Delete Task
   // The method uses the filter() to create a new array that includes all the tasks except for the one with the specified

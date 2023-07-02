@@ -1,19 +1,22 @@
 {
-  "posts": [
+  "tasks": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "id":1,
+      "text": "College Event",
+      "day": "Feb 3th at 6:30pm",
+      "reminder": true 
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id":2,
+      "text": "Meeting at School",
+      "day": "Feb 6th at 1:30pm",
+      "reminder": true 
+    },
+    {
+      "id":3,
+      "text": "Food Shopping",
+      "day": "Feb 5th at 4:30pm",
+      "reminder": false 
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
