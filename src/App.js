@@ -36,7 +36,10 @@ function App() {
   
   // Delete Task
   // The method uses the filter() to create a new array that includes all the tasks except for the one with the specified
-  const deleteTask = (id) => {
+  const deleteTask = async (id) => {
+    await fetch(`http://localhost:5000/tasks/${id}`,{
+      method:'DELETE'
+    })
     console.log('delete',id)
     setTasks(tasks.filter( (tasks) => tasks.id !== id ))
   }
