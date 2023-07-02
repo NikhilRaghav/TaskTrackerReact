@@ -164,7 +164,8 @@ https://create-react-app.dev/docs/deployment/
 ------------------------------------------------------------------------------------------------
 Mock Backend : 
 
-Json Server
+Json Server : https://www.npmjs.com/package/json-server
+
 ------------------------------------------------------------------------------------------------
 .
 .
