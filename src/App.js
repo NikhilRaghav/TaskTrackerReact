@@ -55,16 +55,29 @@ function App() {
   }
 
   // Add Task
-  const addTask = (task) => {
+  const addTask = async (task) => {
     console.log("Adding Task",task)
     
     // to generate a random id
-    const id = Math.floor(Math.random() * 10000 ) + 1
-    console.log("Generated Id is ", id)
+    // const id = Math.floor(Math.random() * 10000 ) + 1
+    // console.log("Generated Id is ", id)
 
-    // Create new task with generated id and passed in task values.
-    const newTask = {id , ...task}
-    setTasks([...tasks, newTask])
+    // // Create new task with generated id and passed in task values.
+    // const newTask = {id , ...task}
+    // setTasks([...tasks, newTask])
+
+    // for using json-server
+    const res = await fetch('http://localhost:5000/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(task),
+    })
+
+    const data = await res.json()
+
+    setTasks([...tasks, data])
     console.log("Updated the tasks with new task")
   }
   
