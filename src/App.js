@@ -33,6 +33,15 @@ function App() {
     console.log(data)
     return data
   }
+
+  // to fetch a single task
+  const fetchTask = async(id) => {
+    const response = await fetch(`http://localhost:5000/tasks/${id}` )
+    const data = await response.json()
+
+    console.log(data)
+    return data
+  }
   
   // Delete Task
   // The method uses the filter() to create a new array that includes all the tasks except for the one with the specified
@@ -45,9 +54,24 @@ function App() {
   }
 
   // Toggle Reminder
-  const toggleReminder = (id) => {
+  const toggleReminder = async (id) => {
+    const taskToToggle = await fetchTask(id)
+    const updatedTask = { ...taskToToggle , reminder: !taskToToggle.reminder}
+
+    const res =  await fetch(`http://localhost:5000/tasks/${id}`,{
+      method:'PUT',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(updatedTask)
+    })
+
+    // if we do not await on promise , then there may be lag in UI and server
+    const data = await res.json()
+
+
     console.log('toggle Reminder for ',id)
-    setTasks(tasks.map( (task) => task.id === id ? { ...task, reminder: !task.reminder } : task ))
+    setTasks(tasks.map( (task) => task.id === id ? { ...task, reminder: data.reminder } : task ))
     // The ...syntax is called the spread syntax and is used to copy an object or an array. 
     // In this case, the spread syntax is used to create a new object with all the properties of the original task, 
     // and then update the reminder property.
