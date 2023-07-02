@@ -166,6 +166,44 @@ Mock Backend :
 
 Json Server : https://www.npmjs.com/package/json-server
 
+npm i json-server --> to install locally ,
+
+then modify the script of package.json
+"server": "json-server --watch db.json --port 5000"
+
+command to run npm run server.
+
+This will by default create a server , and a db.json file , with prefilled data like 
+
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
+
+Resources
+  http://localhost:5000/posts
+  http://localhost:5000/comments
+  http://localhost:5000/profile
+
+  Home
+  http://localhost:5000
+
+
 ------------------------------------------------------------------------------------------------
 .
 .
